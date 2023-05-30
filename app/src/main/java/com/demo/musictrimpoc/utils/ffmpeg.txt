@@ -1,0 +1,46 @@
+Algorithm for reduce background audio side is sidechaincompress
+Here is Doc https://ffmpeg.org/ffmpeg-filters.html#sidechaincompress
+Command :
+
+ffmpeg -i outVideo.mp4 -i loop.mp3 -filter_complex "[1:a]asplit=2[sc][mix];[0:a][sc]sidechaincompress=threshold=0.00098[compr];[compr][mix]amerge" outttt.mp4
+
+-y -i /data/user/0/com.moments/files/60dc8cc7e1897819592cd429/audioFile.mp3 -i /data/user/0/com.moments/files/MergeVideos/60dc8cc7e1897819592cd429/merged60dc8cc7e1897819592cd429.mp4 -filter_complex "[1:a]asplit=2[sc][mix];[0:a][sc]sidechaincompress=threshold=0.00097[compr];[compr][mix]amerge" /data/user/0/com.moments/files/60dc8cc7e1897819592cd429/audioPitchedVideo60dc8cc7e1897819592cd429.mp4
+
+//video in loop
+ffmpeg -i inputVideoFilePath.mp4 -filter_complex "amovie=inputAudioFilePath.mp3:loop=0,asetpts=N/SR/TB[aud];[0:a][aud]amix[a]" -map 0:v -map '[a]' -c:v copy -c:a aac -b:a 256k -shortest outputVideoFilePath.mp4
+
+For merge Files first create txt file with with "File filePath"
+Example:
+file abc.mp4
+now run ffmpeg Command
+ffmpeg -f concat -i file.txt -c copy final.mp4
+
+For remove noise from video  use
+ffmpeg -i sound_1.mp4  -af "highpass=f=200, lowpass=f=3000" clean2.mp4
+
+extract sound from video
+ffmpeg -y -i v1.mp4 -vn -acodec copy onlyAudio.aac
+ffmpeg -y -i outVideo.mp4 -f mp3 -ab 192000 -vn ouput.mp3
+
+
+//set audio in loop into the video
+ffmpeg -i outVideo.mp4 -filter_complex "amovie=filter.mp3:loop=0,asetpts=N/SR/TB[aud];[0:a][aud]amix[a]" -map 0:v -map '[a]' -c:v copy -c:a aac -b:a 256k -shortest outputVideoFilePath.mp4
+
+//set Audio in loop using ffmpeg video length
+first create file using this format 
+
+file 'mp3Path.mp3'
+
+ffmpeg -t 46 -f concat -i loop.txt -c copy -t 46 loop.mp3
+
+//Video merging
+ffmpeg -y -i v5.mp4 -i v6.mp4 -i v7.mp4 -i v4.mp4 -filter_complex "[0]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,setsar=1[v0];[1]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,setsar=1[v1];[2]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,setsar=1[v2];[3]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,setsar=1[v3];[v0][0:a:0][v1][1:a:0][v2][2:a:0][v3][3:a:0]concat=n=4:v=1:a=1[v][a]" -map "[v]" -map "[a]" outVideo.mp4
+
+
+//Trim Song
+ffmpeg -i test.mp4 -ss 00:11:10 -t 00:10:00 -acodec copy -vcodec copy test2.mp4
+
+
+//Video compression
+ffmpeg -i videoPath -vcodec h264 -b:v 1000k -acodec mp3 -preset ultrafast outputPath.mp4
+

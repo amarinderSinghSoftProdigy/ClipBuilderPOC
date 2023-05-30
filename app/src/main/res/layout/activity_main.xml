@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/tvPickAudio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:text="Select Audio"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.pro.audiotrimmer.AudioTrimmerView
+        android:id="@+id/trimAudio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:atv_window_bar_width="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvPickAudio" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/trimAudio">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icPlayPause"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/black"
+            android:src="@drawable/ic_play_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icTrim"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/black"
+            android:src="@drawable/ic_crop_btn_fill"
+            app:layout_constraintStart_toEndOf="@+id/icPlayPause"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icUndo"
+
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="7dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/black"
+            android:src="@drawable/undo"
+            app:layout_constraintStart_toEndOf="@+id/icTrim"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icDelete"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/black"
+            android:padding="7dp"
+            android:src="@drawable/delete"
+            android:tint="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/icUndo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    <com.masoudss.lib.WaveformSeekBar-->
+    <!--        android:id="@+id/audioWaveform"-->
+    <!--        android:layout_marginTop="30dp"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/trimAudio"-->
+    <!--        app:marker_color="@color/teal_200"-->
+    <!--        app:marker_text_color="@color/teal_700"-->
+    <!--        app:marker_text_padding="2dp"-->
+    <!--        app:marker_text_size="12dp"-->
+    <!--        app:marker_width="1dp"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        app:wave_background_color="@color/white"-->
+    <!--        app:wave_corner_radius="2dp"-->
+    <!--        app:wave_gap="2dp"-->
+    <!--        app:wave_gravity="center"-->
+    <!--        app:wave_max_progress="100"-->
+    <!--        app:wave_min_height="5dp"-->
+    <!--        app:wave_padding_Bottom="2dp"-->
+    <!--        app:wave_padding_left="2dp"-->
+    <!--        app:wave_padding_right="2dp"-->
+    <!--        app:wave_padding_top="2dp"-->
+    <!--        app:wave_progress="33"-->
+    <!--        app:wave_progress_color="@color/colorBlue"-->
+    <!--        app:wave_visible_progress="50"-->
+    <!--        app:wave_width="5dp" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
